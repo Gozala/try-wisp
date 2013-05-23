@@ -1,0 +1,20 @@
+{
+  "name": "try-wisp",
+  "id": "try-wisp",
+  "version": "0.0.1",
+  "description": "Interactivate wisp compiler preview",
+  "author": "Irakli Gozalishvili <rfobic@gmail.com> (http://jeditoolkit.com)",
+  "homepage": "https://github.com/Gozala/try-wisp",
+  "scripts": {
+    "start": "./node_modules/makeitso/index.js --ignore ./build/ --ignore ./node_modules/ --ignore ./main.js"
+  },
+  "devDependencies": {
+    "browserify": "~2.14.1",
+    "makeitso": "0.0.1"
+  },
+  "dependencies": {
+    "codemirror-activine": "~0.0.x",
+    "codemirror-persist": "~0.0.x",
+    "wisp": "~0.6.7"
+  }
+}
