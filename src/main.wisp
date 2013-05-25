@@ -1,11 +1,11 @@
 (ns try-wisp.main
   (:require [codemirror-activine :as activine]
             [codemirror-persist :as persist]
-            [wisp.engine.browser])
-  (:use [wisp.sequence :only [rest cons vec]]
-        [wisp.runtime :only [str]]
-        [wisp.reader :only [read*]]
-        [wisp.compiler :only [compile*]]))
+            [wisp.engine.browser]
+            [wisp.sequence :refer [rest cons vec]]
+            [wisp.runtime :refer [str]]
+            [wisp.reader :refer [read*]]
+            [wisp.compiler :refer [compile*]]))
 
 
 ;; Install other plugins
