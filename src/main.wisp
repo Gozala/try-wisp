@@ -5,7 +5,7 @@
             [wisp.sequence :refer [rest cons vec]]
             [wisp.runtime :refer [str]]
             [wisp.reader :refer [read*]]
-            [wisp.compiler :refer [compile*]]))
+            [wisp.compiler :refer [compile]]))
 
 
 ;; Install other plugins
@@ -41,18 +41,19 @@
 
 (def update-preview!
   (throttle (fn [editor]
-              (let [code (.get-value editor)]
+              (.clearGutter editor :error-gutter)
+              (let [code (.get-value editor)
+                    result (compile code {:source-uri "scratch"})
+                    error (:error result)]
                 (set! local-storage.buffer code)
-                (try (do
-                       (.clearGutter editor :error-gutter)
-                       (.set-value output (compile* (read* code "scratch.wisp"))))
-                  (catch error
-                    (do
-                      (.setAttribute *error-marker* :title error.message)
-                      (.setGutterMarker editor
-                                        (or error.line 0)
-                                        :error-gutter
-                                        *error-marker*))))))
+                (if error
+                  (do
+                    (.setAttribute *error-marker* :title error.message)
+                    (.setGutterMarker editor
+                                      (or error.line 0)
+                                      :error-gutter
+                                      *error-marker*))
+                  (.set-value output (:code result)))))
             200))
 
 (def input

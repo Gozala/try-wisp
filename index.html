@@ -124,7 +124,6 @@ My name is wisp!"
 ;; Comparison forms - Wisp comes with special forms for comparisons
 
 (identical? a b)     ;; => a === b
-(identical? a b c)   ;; => a === b && b === c
 (= a b)              ;; => a == b
 (= a b c)            ;; => a == b && b == c
 (> a b)              ;; => a > b
@@ -186,16 +185,17 @@ My name is wisp!"
   (+ a b))
 
 
-;; Functions - Wisp functions are JS functions
+;; Functions - Wisp functions expressions are JS functions
 (fn [x] (+ x 1))
 
-;; Wisp functions can be named similar to JS
+;; Wisp functions expressions can be named similar to JS
 (fn increment [x] (+ x 1))
 
-;; Wisp functions can also contain documentation and some metadata.
+;; Wisp functions declarations are similar, but meant to be more reused,
+;; there for they have optional documentation and some metadata.
 ;; Note: Docstring and metadata is not presented in compiled JS yet,
 ;; but in a future it will compile to comments associated with function.
-(fn incerement
+(defn incerement
   "Returns a number one greater than given."
   {:added "1.0"}
   [x] (+ x 1))
@@ -209,12 +209,10 @@ My name is wisp!"
 ;; Overloads - In wisp functions can be overloaded depending on number
 ;; of arguments they take, without introspection of rest arguments.
 (fn sum
-  "Return the sum of all arguments"
-  {:version "1.0"}
   ([] 0)
   ([x] x)
   ([x y] (+ x y))
-  ([x & more] (more.reduce (fn [x y] (+ x y)) x)))
+  ([x & more] (.reduce more (fn [x y] (+ x y)) x)))
 
 ;; If function does not has variadic overload and more arguments is
 ;; passed to it, it throws exception.
