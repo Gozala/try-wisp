@@ -9,11 +9,11 @@
     "start": "./node_modules/makeitso/index.js --ignore ./build/ --ignore ./node_modules/ --ignore ./main.js"
   },
   "devDependencies": {
-    "browserify": "~2.14.1",
+    "browserify": "3.3.x",
     "makeitso": "0.0.1"
   },
   "dependencies": {
     "codemirror-persist": "~0.0.x",
-    "wisp": "0.9.0-alpha3"
+    "wisp": "0.9.0-beta2"
   }
 }

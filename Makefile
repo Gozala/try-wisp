@@ -16,12 +16,13 @@ endif
 all: main bundle clean
 
 clean:
-	rm *.js
+	rm ./main.js
 
 main:
-	cat ./src/main.wisp | $(WISP) > ./main.js
+	cat ./src/main.wisp | $(WISP) --source-uri try-wisp/main.wisp --output-uri main.js --no-map > ./main.js
+
 
 bundle:
 	$(BROWSERIFY) --debug \
                 --exports require \
-                --entry ./main.js > ./build/main.js
+                --entry ./main.js > ./build/app.js
