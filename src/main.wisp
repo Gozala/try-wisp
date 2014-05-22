@@ -60,6 +60,7 @@
   (CodeMirror (.get-element-by-id document :input)
               {:lineNumbers true
                :matchBrackets true
+               :autoCloseBrackets "()[]{}\"\""
                :electricChars true
                :persist true
 
